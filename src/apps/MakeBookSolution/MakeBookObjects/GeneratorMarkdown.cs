@@ -13,6 +13,7 @@ public class GeneratorMarkdown : IGeneratorFiles
 
     public bool GenerateNow()
     {
+        data.TryToEnsureValid();
         if(data.Validate(new ValidationContext(this)).Any())
         {
             return false;
@@ -26,9 +27,9 @@ public class GeneratorMarkdown : IGeneratorFiles
             RedirectStandardError = true,
             UseShellExecute = false,
             CreateNoWindow = false,
-            Arguments = "-d .settings/pandocHTML.yaml -o .output/index.docx"
+            //Arguments = "-d .settings/pandocHTML.yaml -o .output/index.docx"
             //Arguments = "-d .settings/pandocHTML.yaml -o .output/index.md -t gfm"
-            //Arguments = "-d .settings/pandocHTML.yaml -o .output/index.html"
+            Arguments = "-d .settings/pandocHTML.yaml -o .output/index.html"
         };
 
         // Create and start the process
