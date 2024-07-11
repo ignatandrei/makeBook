@@ -29,7 +29,7 @@ public class GeneratorMarkdown : IGeneratorFiles
             CreateNoWindow = false,
             //Arguments = "-d .settings/pandocHTML.yaml -o .output/index.docx"
             //Arguments = "-d .settings/pandocHTML.yaml -o .output/index.md -t gfm"
-            Arguments = "-d .settings/pandocHTML.yaml -o .output/index.html"
+            Arguments = "-d .settings/pandocHTML.yaml --metadata=title:\"Andrei Title\" --metadata=author:\"Andrei Author\" --title Andressi -o .output/index.html"
         };
 
         // Create and start the process

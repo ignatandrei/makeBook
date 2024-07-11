@@ -25,10 +25,10 @@ self-contained: true
 
 # metadata values specified here are parsed as literal
 # string text, not markdown:
-metadata:
-  title: RSCG Examples
-  author:
-  - Andrei Ignat
+# metadata:
+#   title: This is the title
+#   author:
+#   - this is the author
 
 # Note that these take files, not their contents:
 include-before-body: []
