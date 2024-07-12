@@ -399,3 +399,4 @@ FodyWeavers.xsd
 src/structure/markdown/log.json
 src/structure/markdown/.pandoc/pandoc.exe
 src/structure/markdown/.output/*.docx
+src/structure/markdown/.output/*.html
