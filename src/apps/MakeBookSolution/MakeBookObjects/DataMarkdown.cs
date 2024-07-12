@@ -51,14 +51,14 @@ public class DataMarkdown(string Folder) : IValidatableObject
 
             }
         }        
-        var dataBook= bookData.FromJson(File.ReadAllText(bookDataPath));
-        if (dataBook == null)
+        this.BookData = bookData.FromJson(File.ReadAllText(bookDataPath));
+        if (this.BookData == null)
         {
             yield return new ValidationResult($"File {bookDataPath} is not a valid json", new[] { nameof(Folder) });
         }
         else
         {
-            foreach (var item in dataBook.Validate(new ValidationContext(dataBook)))
+            foreach (var item in BookData.Validate(new ValidationContext(BookData)))
             {
                 yield return item;
             }

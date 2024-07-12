@@ -6,3 +6,4 @@ foreach (var item in generatorFiles.Validate(new ValidationContext(generatorFile
     WriteLine("Error:" + item.ErrorMessage);
 }
 WriteLine($"GenerateNow: {generatorFiles.GenerateNow()}");
+

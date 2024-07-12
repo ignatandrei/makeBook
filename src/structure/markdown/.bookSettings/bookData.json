@@ -2,5 +2,15 @@
     "book":{
         "title":"@bookName",
         "author":"@author"
-    }
+    },
+    "commands": [
+      {
+        "name": "make a html",
+        "value": "-d .settings/pandocHTML.yaml --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" -o .output/index.html"
+      },      
+      {
+        "name": "make a word",
+        "value": "-d .settings/pandocHTML.yaml  --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" -o .output/index.docx"
+      }
+    ]
 }

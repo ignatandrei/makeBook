@@ -34,6 +34,25 @@ public partial class bookData: IValidatableObject
     }
     public static bookData? FromJson(string json)
     {
-        return System.Text.Json.JsonSerializer.Deserialize<bookData>(json);
+        var data= System.Text.Json.JsonSerializer.Deserialize<bookData>(json);
+        if(data == null)
+        {
+            return null;
+        }
+        if(data.Commands == null)
+        {
+            return data;
+        }
+        if (data.Book == null)
+            return data;
+        foreach (var cmd in data.Commands)
+        {
+            //TODO 2025-01-01 make RSCG_IFormattable for parsing commands
+            if (!string.IsNullOrEmpty(cmd.Value))
+            {
+                cmd.Value = cmd.Value.Replace("{title}", data.Book.Title).Replace("{author}", data.Book.Author);
+            }
+        }
+        return data;
     }
 }
