@@ -37,20 +37,33 @@ public class DataMarkdown(string Folder) : IValidatableObject
     private IEnumerable<ValidationResult> ValidateBookSettings()
     {
         
-        var bookData = BookDataJson();
-        if (!File.Exists(bookData))
+        var bookDataPath = BookDataJson();
+        if (!File.Exists(bookDataPath))
         {
-            var folderSettings = Path.GetDirectoryName(bookData);
+            var folderSettings = Path.GetDirectoryName(bookDataPath);
             if (!Directory.Exists(folderSettings))
             {
                 yield return new ValidationResult($"Directory {folderSettings} does not exist"); ;
             }
             else
             {
-                yield return new ValidationResult($"File {bookData} does not exist", new[] { nameof(Folder) });
+                yield return new ValidationResult($"File {bookDataPath} does not exist", new[] { nameof(Folder) });
 
             }
         }        
+        var dataBook= bookData.FromJson(File.ReadAllText(bookDataPath));
+        if (dataBook == null)
+        {
+            yield return new ValidationResult($"File {bookDataPath} is not a valid json", new[] { nameof(Folder) });
+        }
+        else
+        {
+            foreach (var item in dataBook.Validate(new ValidationContext(dataBook)))
+            {
+                yield return item;
+            }
+        }
+        
     }
     private IEnumerable<ValidationResult> ValidatePandoc()
     {

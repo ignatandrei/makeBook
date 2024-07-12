@@ -1,6 +1,15 @@
 {
-    "book":{
-        "title":"@bookName",
-        "author":"@author"
+  "book": {
+    "title": "@bookName",
+    "author": "@author"
+  },
+  "commands": [
+    {
+      "name": "install the npm ",
+      "value": "npm install"
     }
+  ]
+  
+
+
 }
