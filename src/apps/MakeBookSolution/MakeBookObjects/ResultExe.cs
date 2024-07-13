@@ -37,12 +37,15 @@ public class ResultExe
         return resultExe;
 
     }
+    
 }
 
 public class  ResultsExe : List<ResultExe>
 {
-    public void Execute(ProcessStartInfo startInfo)
+    public ResultExe Execute(ProcessStartInfo startInfo)
     {
-        Add(ResultExe.Execute(startInfo));
+        var data= ResultExe.Execute(startInfo);
+        Add(data);
+        return data;
     }
 }

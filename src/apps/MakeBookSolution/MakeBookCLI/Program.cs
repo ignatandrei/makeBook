@@ -7,7 +7,28 @@ foreach (var item in generatorFiles.Validate(new ValidationContext(generatorFile
 {
     WriteLine("Error:" + item.ErrorMessage);
 }
-WriteLine($"GenerateNow: {generatorFiles.GenerateNow()}");
+WriteLine($"GenerateNow");
+var result =  generatorFiles.GenerateNow() ;
+result.Switch(
+    ok => WriteLine("Generating OK"),
+    validation =>
+    {
+        WriteLine("There are validation problems");
+        foreach (var item in validation.results)
+        {
+            WriteLine(item.ToString());
+        }
+    },
+    problems =>
+    {
+        WriteLine("There are problems running the exe");
+        foreach (var item in problems.resultExes)
+        {
+            WriteLine(item.ToString());
+        }
+    }
+);
+
 //PrintDocument printDocument = new ();
 //printDocument.PrinterSettings.PrinterName = "Microsoft Print to PDF";
 
