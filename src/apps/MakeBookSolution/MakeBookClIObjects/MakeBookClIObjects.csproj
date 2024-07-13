@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <EmbeddedResource Include="..\..\..\structure\markdown\.bookSettings\bookData.json" Link="bookData.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MakeBookObjects\MakeBookObjects.csproj" />
   </ItemGroup>
 

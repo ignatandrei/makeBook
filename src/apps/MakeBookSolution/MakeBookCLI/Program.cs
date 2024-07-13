@@ -28,6 +28,7 @@ try
         InitFolderStructure initFolder = new(folderWithFiles);
         initFolder.InitNow();
 
+
     }, folder);
     rootCommand.AddCommand(cmdInit);
 
