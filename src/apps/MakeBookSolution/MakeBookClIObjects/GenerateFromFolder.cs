@@ -1,8 +1,6 @@
-﻿
-using System.IO;
+﻿namespace MakeBookClIObjects;
 
-namespace MakeBookCLI;
-internal class GenerateFromFolder
+public class GenerateFromFolder
 {
     private readonly IGeneratorFiles generatorFiles;
     FileSystemWatcher fileSystemWatcher;
@@ -12,7 +10,7 @@ internal class GenerateFromFolder
         this.generatorFiles = generator;
         fileSystemWatcher = new FileSystemWatcher(folder);
         fileSystemWatcher.EnableRaisingEvents = true;
-        
+
         fileSystemWatcher.Filter = "*.*";
         fileSystemWatcher.IncludeSubdirectories = true;
         fileSystemWatcher.Created += (sender, e) => ReGenerate(e);
@@ -28,11 +26,11 @@ internal class GenerateFromFolder
     private void ReGenerate(FileSystemEventArgs e)
     {
         var whatChanged = e.FullPath;
-        if(whatChanged.Contains(".output"))
+        if (whatChanged.Contains(".output"))
         {
             return;
         }
-        if(whatChanged.Contains("log.json"))
+        if (whatChanged.Contains("log.json"))
         {
             return;
         }
@@ -42,17 +40,22 @@ internal class GenerateFromFolder
     }
 
     public string Folder { get; }
-    public void GenerateNow()
+    public bool GenerateNow()
     {
-        
+        bool HasValidationErrors = false;   
         foreach (var item in generatorFiles.Validate(new ValidationContext(generatorFiles)))
         {
+            HasValidationErrors = true;
             WriteLine("Error:" + item.ErrorMessage);
+        }
+        if(HasValidationErrors)
+        {
+            return false;
         }
         WriteLine($"GenerateNow");
         var result = generatorFiles.GenerateNow();
         result.Switch(
-            ok => WriteLine("Generating OK"),
+            ok => { WriteLine("Generating OK"); },
             validation =>
             {
                 WriteLine("There are validation problems");
@@ -60,6 +63,7 @@ internal class GenerateFromFolder
                 {
                     WriteLine(item.ToString());
                 }
+                
             },
             problems =>
             {
@@ -79,7 +83,9 @@ internal class GenerateFromFolder
                     WriteLine(item.ToString(""));
                     WriteLine("--");
                 }
+                
             }
         );
+        return true;
     }
 }

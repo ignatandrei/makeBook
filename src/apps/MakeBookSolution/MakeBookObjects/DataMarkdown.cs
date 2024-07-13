@@ -10,6 +10,10 @@ public class DataMarkdown(string Folder) : IValidatableObject
             return true;
 
         string zip = PandocExe.Replace(".exe", ".zip");
+        if (!File.Exists(zip))
+        {
+            return false;
+        }
         ZipFile.ExtractToDirectory(zip,Path.GetDirectoryName(fileExe)!);
         return true;
 
@@ -38,6 +42,7 @@ public class DataMarkdown(string Folder) : IValidatableObject
     {
         
         var bookDataPath = BookDataJson();
+        bool existsBookDataPath = File.Exists(bookDataPath);
         if (!File.Exists(bookDataPath))
         {
             var folderSettings = Path.GetDirectoryName(bookDataPath);
@@ -51,7 +56,8 @@ public class DataMarkdown(string Folder) : IValidatableObject
 
             }
         }
-        string text = "";
+        if (!existsBookDataPath) { yield break; }
+            string text = "";
         using (FileStream stream = File.Open(bookDataPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
         {
             
