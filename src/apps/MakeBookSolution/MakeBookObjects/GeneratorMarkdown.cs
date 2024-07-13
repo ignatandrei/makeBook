@@ -1,17 +1,25 @@
 ﻿namespace MakeBookObjects;
 public class GeneratorMarkdown : IGeneratorFiles
 {
-    private DataMarkdown data { get; }
+    private DataMarkdown data { get; set; }
     public GeneratorMarkdown(string folder)
     {
         Folder = folder;
         data = new DataMarkdown(folder);
     }
     public string Folder { get; }
-    public ResultsExe resultExes { get; } = new();
+    public ResultsExe resultExes { get; private set; } = new();
     public Commands[]? cmds; 
+    private void Reset()
+    {
+        data = new DataMarkdown(Folder);
+
+        resultExes.Clear();
+
+    }
     public Results GenerateNow()
     {
+        Reset();        
         data.TryToEnsureValid();
         var problems = data.Validate(new ValidationContext(this)).ToArray();
         if (problems.Any())

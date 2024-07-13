@@ -2,43 +2,17 @@
 
 string folder = @"D:\gth\makeBook\src\structure\markdown";
 WriteLine($"Folder: {folder}");
+
+
 IGeneratorFiles generatorFiles = new GeneratorMarkdown(folder);
-foreach (var item in generatorFiles.Validate(new ValidationContext(generatorFiles)))
+GenerateFromFolder generateFromFolder = new (folder, generatorFiles);
+generateFromFolder.GenerateNow();
+while (true)
 {
-    WriteLine("Error:" + item.ErrorMessage);
+    Console.WriteLine("wait");
+    generateFromFolder.Wait();
 }
-WriteLine($"GenerateNow");
-var result =  generatorFiles.GenerateNow() ;
-result.Switch(
-    ok => WriteLine("Generating OK"),
-    validation =>
-    {
-        WriteLine("There are validation problems");
-        foreach (var item in validation.results)
-        {
-            WriteLine(item.ToString());
-        }
-    },
-    problems =>
-    {
-        var cmdsSuccess = problems.cmdsNoError();
-        if(cmdsSuccess?.Length > 0)
-        {
-            WriteLine("Successfully executed");
-            foreach (var item in cmdsSuccess)
-            {
-                WriteLine(item.Name);
-            }
-        }
-        WriteLine("Items with Problems");
-        foreach (var item in problems.resultExesErrors)
-        {
-            WriteLine(item.Name);
-            WriteLine(item.ToString(""));
-            WriteLine("--");
-        }
-    }
-);
+
 
 //PrintDocument printDocument = new ();
 //printDocument.PrinterSettings.PrinterName = "Microsoft Print to PDF";

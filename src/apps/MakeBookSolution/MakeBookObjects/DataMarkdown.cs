@@ -50,8 +50,18 @@ public class DataMarkdown(string Folder) : IValidatableObject
                 yield return new ValidationResult($"File {bookDataPath} does not exist", new[] { nameof(Folder) });
 
             }
-        }        
-        this.BookData = bookData.FromJson(File.ReadAllText(bookDataPath));
+        }
+        string text = "";
+        using (FileStream stream = File.Open(bookDataPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+        {
+            
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                text = reader.ReadToEnd();
+            }
+        }
+        //Console.WriteLine("!!!text: " + text);
+        this.BookData = bookData.FromJson(text);
         if (this.BookData == null)
         {
             yield return new ValidationResult($"File {bookDataPath} is not a valid json", new[] { nameof(Folder) });
