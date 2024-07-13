@@ -11,6 +11,10 @@
       {
         "name": "make a word",
         "value": "-d .settings/pandocHTML.yaml  --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" -o .output/index.docx"
+      },
+      {
+        "name":"make an epub",
+        "value":"-d .settings/pandocHTML.yaml  --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" -o .output/index.epub"
       }
     ]
 }

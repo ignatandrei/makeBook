@@ -13,5 +13,8 @@
 	<PropertyGroup>
 		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
 	</PropertyGroup>
-
+	<ItemGroup>
+		<PackageReference Include="OneOf" Version="3.0.255" />
+		<PackageReference Include="OneOf.SourceGenerator" Version="3.0.255" />
+	</ItemGroup>
 </Project>

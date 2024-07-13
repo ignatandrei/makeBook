@@ -10,7 +10,7 @@ public class GeneratorMarkdown : IGeneratorFiles
         data = new DataMarkdown(folder);
     }
     public string Folder { get; }
-
+    public ResultsExe resultExes { get; } = new();
     public bool GenerateNow()
     {
         data.TryToEnsureValid();
@@ -38,25 +38,8 @@ public class GeneratorMarkdown : IGeneratorFiles
                 //Arguments = "-d .settings/pandocHTML.yaml -o .output/index.md -t gfm"
                 Arguments = cmd.Value
             };
-
+            this.resultExes.Execute(startInfo);
             // Create and start the process
-            Process process = new Process
-            {
-                StartInfo = startInfo
-            };
-            process.Start();
-
-            // Read the output
-            string output = process.StandardOutput.ReadToEnd();
-            string errorOutput = process.StandardError.ReadToEnd();
-
-            // Wait for the process to exit
-            process.WaitForExit();
-            if (process.ExitCode != 0)
-            {
-                Console.WriteLine($"Error: {errorOutput}");
-                continue;
-            }
             continue;
         }
         return true;
