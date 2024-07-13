@@ -1,7 +1,7 @@
 {
     "book":{
-        "title":"@bookName",
-        "author":"@author"
+        "title":"Please edit title in bookData.json from .bookSettings",
+        "author":"Please edit author in bookData.json from .bookSettings"
     },
     "commands": [
       {

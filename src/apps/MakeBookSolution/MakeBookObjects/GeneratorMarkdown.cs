@@ -1,6 +1,4 @@
-﻿
-
-namespace MakeBookObjects;
+﻿namespace MakeBookObjects;
 public class GeneratorMarkdown : IGeneratorFiles
 {
     private DataMarkdown data { get; }
