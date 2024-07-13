@@ -37,7 +37,7 @@ internal class GenerateFromFolder
             return;
         }
 
-        WriteLine($"Regenerating for {whatChanged}");
+        WriteLine($"Regenerating for {whatChanged} at {DateTime.Now.ToString("HHmmss")}");
         GenerateNow();
     }
 
