@@ -21,8 +21,21 @@ public class InitFolderStructure(string folder) : IValidatableObject
     {
         if(!Directory.Exists(folder))
         {
-            yield return new ValidationResult($"Folder {folder} does not exist", new[] { nameof(folder) });
-            yield break;
+            Exception? ex= null;
+            try
+            {
+                Directory.CreateDirectory(folder);
+            }
+            catch(Exception ex1)
+            {
+                ex = ex1;
+            }
+            if (ex != null)
+            {
+                yield return new ValidationResult($"Error creating folder {folder} {ex.Message}", new[] { nameof(folder) });
+                yield break;
+
+            }
         }
         if (Directory.EnumerateDirectories(folder).Any())
         {
