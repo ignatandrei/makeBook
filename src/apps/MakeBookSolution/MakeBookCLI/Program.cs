@@ -1,12 +1,14 @@
 ﻿//using System.Drawing.Printing;
 
+using System.ComponentModel.DataAnnotations;
+
 try
 {
     if (args.Length == 0)
     {
         args = new[] { "-h" };
-        args = new[] { "gmk","--folder", @"D:\gth\makeBook\src\structure\markdown\" };
-        //args = new[] { "gmk", "--folder", @"D:\gth\makeBook\src\" };
+        //args = new[] { "gmk","--folder", @"D:\gth\makeBook\src\structure\markdown\" };
+        args = new[] { "i", "--folder", @"D:\gth\test1\" };
     }
     RootCommand rootCommand = new();
     rootCommand.Description = "Generate a book from a folder";
@@ -18,6 +20,18 @@ try
     folder.AddAlias("-f");
     folder.AddAlias("-d");
     rootCommand.AddGlobalOption(folder);
+
+    Command cmdInit = new("init", "Initialize a folder with the book data");
+    cmdInit.AddAlias("i");
+    cmdInit.SetHandler((folderWithFiles) =>
+    {
+        
+        WriteLine($"Will start init in folder: {folderWithFiles}");
+        InitFolderStructure initFolder = new(folderWithFiles);
+        initFolder.InitNow();
+
+    }, folder);
+    rootCommand.AddCommand(cmdInit);
 
     Command cmdGenerateMarkdown = new("generateFromMarkdown", "Generate from Markdown");
     cmdGenerateMarkdown.AddAlias("gmk");
