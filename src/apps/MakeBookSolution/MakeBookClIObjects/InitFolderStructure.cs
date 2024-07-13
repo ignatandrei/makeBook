@@ -15,9 +15,45 @@ public class InitFolderStructure(string folder) : IValidatableObject
         {
             return;
         }
+        CreateFolder(folder, ".bookSettings",it=> MarkdownInit.GetResouceBookSettings(it).ToArray(), "bookData.json");
+        CreateFolder(folder, ".settings", it => MarkdownInit.GetResouceSettings(it).ToArray(), "customWord.docx", "pandocHTML.yaml");
+        CreateFolder(folder, "book", it => MarkdownInit.GetResouceBook(it).ToArray(), "Chapter001.md", "Introduction.md", "Introduction_Assets/author.png", "Chapter001_Assets/.gitkeep");
+        CreateFolder(folder, ".output", it => MarkdownInit.GetResouceOutput(it).ToArray(),  ".gitkeep");
+        CreateFolder(folder, "", it => MarkdownInit.GetResouceRoot(it).ToArray(), "_readme.html");
+        CreateFolder(folder, ".pandoc", it => MarkdownInit.GetResoucePandoc(it).ToArray(), "COPYING.rtf", "COPYRIGHT.txt", "MANUAL.html");
+        File.WriteAllBytes(Path.Combine(folder,".pandoc", "pandoc.zip"), MarkdownInit.GetPandocZip);
+    }
+    private void CreateFolder(string folderRoot, string name, Func<string, byte[]> obtainData, params string[] files)
+    {
+        if (!Directory.Exists(folderRoot))
+        {
+            Directory.CreateDirectory(folderRoot);
+        }
+        var folder = folderRoot;
+        if (!string.IsNullOrEmpty(name)){
+            folder = Path.Combine(folderRoot, name);
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+        }
+        foreach (var file in files)
+        {
+            var fileData = obtainData(file);
+            var filePath = Path.Combine(folder, file);
+            var pathFile = Path.GetDirectoryName(filePath);
+            if (!Directory.Exists(pathFile))
+            {
+                Directory.CreateDirectory(pathFile);
+            }
+            if (!File.Exists(filePath))
+            {
+                File.WriteAllBytes(filePath, fileData);
+            }
+        }
     }
 
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         if(!Directory.Exists(folder))
         {

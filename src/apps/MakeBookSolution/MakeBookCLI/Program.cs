@@ -1,7 +1,7 @@
 ﻿//using System.Drawing.Printing;
-
-try
+    try
 {
+    
     if (args.Length == 0)
     {
         args = new[] { "-h" };
@@ -25,8 +25,13 @@ try
     {
         
         WriteLine($"Will start init in folder: {folderWithFiles}");
+        if(Directory.Exists(folderWithFiles))
+        {
+            Directory.Delete(folderWithFiles    , true);            
+        }
         InitFolderStructure initFolder = new(folderWithFiles);
         initFolder.InitNow();
+        WriteLine($"now execute gmk --folder "+folderWithFiles);
 
 
     }, folder);
