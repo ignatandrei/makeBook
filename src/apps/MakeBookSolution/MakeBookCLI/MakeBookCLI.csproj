@@ -12,7 +12,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MakeBookGenerator\MakeBookGenerator.csproj" />
     <ProjectReference Include="..\MakeBookObjects\MakeBookObjects.csproj" />
   </ItemGroup>
 

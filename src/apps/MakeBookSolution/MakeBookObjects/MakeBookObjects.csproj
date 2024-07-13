@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MakeBookGenerator\MakeBookGenerator.csproj" />
     <ProjectReference Include="..\MakeBookObjectsFromTemplate\MakeBookObjectsFromTemplate.csproj" />
   </ItemGroup>
 	<PropertyGroup>
