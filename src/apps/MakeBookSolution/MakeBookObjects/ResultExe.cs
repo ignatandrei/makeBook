@@ -1,6 +1,7 @@
 ﻿
 namespace MakeBookObjects;
-public class ResultExe
+[RSCG_IFormattableCommon.AddIFormattable]
+public partial class ResultExe
 {
     public ResultExe(DateTime startDate, ProcessStartInfo processStartInfo)
     {
