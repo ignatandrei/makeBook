@@ -11,6 +11,7 @@ public class GeneratorMarkdown : IGeneratorFiles
     }
     public string Folder { get; }
     public ResultsExe resultExes { get; } = new();
+    public Commands[]? cmds; 
     public Results GenerateNow()
     {
         data.TryToEnsureValid();
@@ -19,9 +20,11 @@ public class GeneratorMarkdown : IGeneratorFiles
         {
             return new ResultValidationProblems(problems);
         }
+        
         ArgumentNullException.ThrowIfNull(data.BookData);
-        var commands = data.BookData.Commands;
+        var commands = data.BookData.Commands?.ToArray();
         ArgumentNullException.ThrowIfNull(commands);
+
         foreach (var cmd in commands)
         {
 
@@ -39,7 +42,8 @@ public class GeneratorMarkdown : IGeneratorFiles
                 //Arguments = "-d .settings/pandocHTML.yaml -o .output/index.md -t gfm"
                 Arguments = cmd.Value
             };
-            this.resultExes.Execute(startInfo);            
+            ResultExe res= this.resultExes.Execute(startInfo);
+            res.Name = cmd.Name;
             // Create and start the process 
             continue;
         }
@@ -49,7 +53,7 @@ public class GeneratorMarkdown : IGeneratorFiles
             return new ResultOK();
         }
         
-        return new ResultProblemsRunExe(errors);
+        return new ResultProblemsRunExe(commands,errors);
     }
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

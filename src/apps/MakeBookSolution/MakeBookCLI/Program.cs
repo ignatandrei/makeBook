@@ -21,10 +21,21 @@ result.Switch(
     },
     problems =>
     {
-        WriteLine("There are problems running the exe");
-        foreach (var item in problems.resultExes)
+        var cmdsSuccess = problems.cmdsNoError();
+        if(cmdsSuccess?.Length > 0)
         {
-            WriteLine(item.ToString());
+            WriteLine("Successfully executed");
+            foreach (var item in cmdsSuccess)
+            {
+                WriteLine(item.Name);
+            }
+        }
+        WriteLine("Items with Problems");
+        foreach (var item in problems.resultExesErrors)
+        {
+            WriteLine(item.Name);
+            WriteLine(item.ToString(""));
+            WriteLine("--");
         }
     }
 );

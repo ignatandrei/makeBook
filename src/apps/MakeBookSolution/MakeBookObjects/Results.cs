@@ -15,11 +15,21 @@ public class ResultOK
 }
 public class ResultProblemsRunExe
 {
-    public readonly ResultExe[] resultExes;
+    public readonly ResultExe[] resultExesErrors;
+    private readonly Commands[] cmds;
 
-    public ResultProblemsRunExe(ResultExe[] resultExes)
+    public ResultProblemsRunExe(Commands[] cmds, ResultExe[] resultExes)
     {
-        this.resultExes = resultExes;
+        this.resultExesErrors = resultExes.ToArray();
+        this.cmds = cmds;
+    }
+    public Commands[] cmdsNoError()
+    {
+        return cmds.Where(x => resultExesErrors.All(y => y.Name != x.Name)).ToArray();
+    }
+    public Commands[] cmdsError()
+    {
+        return cmds.Where(x => resultExesErrors.Any(y => y.Name == x.Name)).ToArray();
     }
 }
 

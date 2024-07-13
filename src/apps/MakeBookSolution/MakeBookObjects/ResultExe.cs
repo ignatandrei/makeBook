@@ -11,6 +11,7 @@ public partial class ResultExe
         WorkingDirectory = processStartInfo.WorkingDirectory;
 
     }
+    public string Name { get; set; } ="";
     public string? Executable { get; set; }
     public string? Arguments { get; set; }
     public int? ExitCode { get; set; }
@@ -41,12 +42,25 @@ public partial class ResultExe
     
 }
 
-public class  ResultsExe : List<ResultExe>
+public class  ResultsExe : List<ResultExe>, IFormattable
 {
     public ResultExe Execute(ProcessStartInfo startInfo)
     {
         var data= ResultExe.Execute(startInfo);
         Add(data);
         return data;
+    }
+
+    public string ToString(string? format, IFormatProvider? formatProvider)
+    {
+        if (format == null) format = "G";
+        if (formatProvider == null) formatProvider = System.Globalization.CultureInfo.CurrentCulture;
+        var result = "";
+        foreach (var item in this)
+        {
+            result += item.ToString(format, formatProvider);
+
+        }
+        return result;
     }
 }
