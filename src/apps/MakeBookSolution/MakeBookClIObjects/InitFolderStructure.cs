@@ -16,7 +16,7 @@ public class InitFolderStructure(string folder) : IValidatableObject
             return;
         }
         CreateFolder(folder, ".bookSettings",it=> MarkdownInit.GetResouceBookSettings(it).ToArray(), "bookData.json");
-        CreateFolder(folder, ".settings", it => MarkdownInit.GetResouceSettings(it).ToArray(), "customWord.docx", "pandocHTML.yaml");
+        CreateFolder(folder, ".settings", it => MarkdownInit.GetResouceSettings(it).ToArray(), "customWord.docx", "pandocHTML.yaml", "pandocHTML.yaml.template");
         CreateFolder(folder, "book", it => MarkdownInit.GetResouceBook(it).ToArray(), "Chapter001.md", "Introduction.md", "Introduction_Assets/author.png", "Chapter001_Assets/.gitkeep");
         CreateFolder(folder, ".output", it => MarkdownInit.GetResouceOutput(it).ToArray(),  ".gitkeep");
         CreateFolder(folder, "", it => MarkdownInit.GetResouceRoot(it).ToArray(), "_readme.html");
