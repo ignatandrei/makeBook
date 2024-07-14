@@ -5,8 +5,8 @@
     if (args.Length == 0)
     {
         args = new[] { "-h" };
-        //args = new[] { "gmk","--folder", @"D:\gth\makeBook\src\structure\markdown\" };
-        args = new[] { "i", "--folder", @"D:\gth\test1\" };
+        args = new[] { "gmk","--folder", @"D:\gth\test1\" };
+        //args = new[] { "i", "--folder", @"D:\gth\test1\" };
     }
     RootCommand rootCommand = new();
     rootCommand.Description = "Generate a book from a folder";

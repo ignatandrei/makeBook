@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MakeBookObjectsFromTemplate\MakeBookObjectsFromTemplate.csproj" />
+    <ProjectReference Include="..\MakeBookObjectsTemplating\MakeBookObjectsTemplating.csproj" />
   </ItemGroup>
 	<PropertyGroup>
 		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>

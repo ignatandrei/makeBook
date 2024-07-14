@@ -34,6 +34,10 @@ public class GenerateFromFolder
         {
             return;
         }
+        if(whatChanged.EndsWith("pandocHTML.yaml"))
+        {
+            return;
+        }
 
         WriteLine($"Regenerating for {whatChanged} at {DateTime.Now.ToString("HHmmss")}");
         GenerateNow();

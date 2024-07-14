@@ -18,6 +18,11 @@ public class DataMarkdown(string Folder) : IValidatableObject
         return true;
 
     }
+    private string[] GrabMarkdownDocuments()
+    {
+        var folder = Path.Combine(Folder, "book");
+        return Directory.GetFiles(folder, "*.md");
+    }
     public void TryToEnsureValid()
     {
         ExtractPandoc();
@@ -35,9 +40,99 @@ public class DataMarkdown(string Folder) : IValidatableObject
         {
             return vc;
         }
+        vc = ValidateSettings().ToArray();
+        if (vc.Length > 0)
+        {
+            return vc;
+        }
+        vc = ValidateBook().ToArray();
+        if (vc.Length > 0)
+        {
+            return vc;
+        }
         return Enumerable.Empty<ValidationResult>();
     }
+    private IEnumerable<ValidationResult> ValidateBook()
+    {
+        var folder = Path.Combine(Folder, "book");
+        if (!Directory.Exists(folder))
+        {
+            yield return new ValidationResult($"Directory {folder} does not exist");
+            yield break;
+        }
+        var files = GrabMarkdownDocuments();
+        if (files.Length == 0)
+        {
+            yield return new ValidationResult($"No markdown files found in {folder}");
+        }
 
+    }
+    private IEnumerable<ValidationResult> ValidateSettings()
+    {
+        var folder = Path.Combine(Folder, ".settings");
+        if (!Directory.Exists(folder))
+        {
+            yield return new ValidationResult($"Directory {folder} does not exist");
+            yield break;
+        }
+        var file = Path.Combine(folder, "customWord.docx");
+        if (!File.Exists(file))
+        {
+            yield return new ValidationResult($"File {file} does not exist", new[] { nameof(Folder) });
+        }
+        var fileYaml = Path.Combine(folder, "pandocHTML.yaml");
+        if (!File.Exists(fileYaml))
+        {
+            yield return new ValidationResult($"File {fileYaml} does not exist", new[] { nameof(Folder) });
+        }
+        var fileTemplate = Path.Combine(folder, "pandocHTML.yaml.template");
+        if (!File.Exists(fileTemplate))
+        {
+            yield return new ValidationResult($"File {fileTemplate} does not exist", new[] { nameof(Folder) });
+            yield break;
+        }
+        var files= GrabMarkdownDocuments();
+        var comparer = Comparer<string>.Create((a, b) =>
+        {
+            //Console.WriteLine("a: " + a + "==="+ a.Contains("Introduction"));
+            if (a.Contains("Introduction"))
+            {
+                return -1;
+            }
+            if (b.Contains("Introduction"))
+            {
+                return  1;
+            }
+            return a.CompareTo(b);
+        });
+        //Console.WriteLine("files: " + files.Length);
+        var booksRelatives=files
+            .Select(it=>it.Substring(Folder.Length))
+            .Select(it=>it.Replace("\\","/"))
+            .OrderBy(x=>x,comparer)            
+            .ToArray();
+
+        //foreach (var item in booksRelatives)
+        //{
+        //    Console.WriteLine(item);
+        //}
+        var res = TemplatingData.RenderTemplating(fileTemplate, 
+            new { books=files, bookRelative= booksRelatives });
+        ValidationResult? var = null;
+        res.Switch(
+            it => {},
+            it => { var = new ValidationResult($"File {it.FileName} Not found"); },
+            it => { var = it[0]; }
+            );
+        if(var != null)
+        {
+           yield return var;
+        }
+        else
+        {
+           File.WriteAllText(fileYaml, res.AsT0);
+        }
+    }
     private IEnumerable<ValidationResult> ValidateBookSettings()
     {
         
