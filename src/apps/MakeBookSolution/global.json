@@ -4,7 +4,7 @@
     "build": "dotnet build --configuration Release",
     "test": "dotnet test --configuration Release",
     "ci": "dotnet r build && dotnet r test",
-    "publishSingleFullWindows":"dotnet publish MakeBookCLI/MakeBookCLI.csproj -c debug -r win-x64 --sc true -p:PublishSingleFile=true",
+    "publishSingleFullWindows":"dotnet publish MakeBookCLI/MakeBookCLI.csproj -c debug -r win-x64 --sc true -o release -p:PublishSingleFile=true",
     "release":"dotnet r build && dotnet r publishSingleFull"
   }
 }
