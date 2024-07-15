@@ -1,11 +1,12 @@
 ﻿//using System.Drawing.Printing;
     try
 {
-    //todo: https://github.com/RickStrahl/Westwind.RazorHosting   
     if (args.Length == 0)
     {
         args = new[] { "-h" };
-        args = new[] { "gmk","--folder", @"D:\gth\test1\" };
+        //args = new[] { "--version" };
+
+        //args = new[] { "gmk","--folder", @"D:\gth\test1\" };
         //args = new[] { "i", "--folder", @"D:\gth\test1\" };
     }
     RootCommand rootCommand = new();
