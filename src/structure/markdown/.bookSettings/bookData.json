@@ -7,7 +7,7 @@
     {
       "name": "pandoc",
       "value": ".pandoc/pandoc.exe",
-      "valueInstall": "%AppData%\\Local\\Pandoc\\pandoc.exe"
+      "valueInstall": "%LocalAppData%\\Pandoc\\pandoc.exe"
     }
 
   ],

@@ -22,7 +22,7 @@ public class InitFolderStructure(string folder) : IValidatableObject
         CreateFolder(folder, "book", it => MarkdownInit.GetResouceBook(it).ToArray(), "Chapter001.md", "Introduction.md", "Introduction_Assets/author.png", "Chapter001_Assets/.gitkeep");
         CreateFolder(folder, ".output", it => MarkdownInit.GetResouceOutput(it).ToArray(),  ".gitkeep");
         CreateFolder(folder, "", it => MarkdownInit.GetResouceRoot(it).ToArray(), "_readme.html");
-        CreateFolder(folder, ".pandoc", it => MarkdownInit.GetResoucePandoc(it).ToArray(), "COPYING.rtf", "COPYRIGHT.txt", "MANUAL.html");
+        CreateFolder(folder, ".pandoc", it => MarkdownInit.GetResoucePandoc(it).ToArray(), "COPYING.rtf", "COPYRIGHT.txt", "Pandoc User's Guide.html");
         string zip = Path.Combine(folder, ".pandoc", "pandoc.zip");
         File.WriteAllBytes(zip, MarkdownInit.GetPandocZip);
         Thread.Sleep(15000);

@@ -216,7 +216,7 @@ public class DataMarkdown(string Folder) : IValidatableObject
         {
             yield return new ValidationResult($"File {pandoc} does not exist", new[] { nameof(Folder) });
         }
-        pandoc = Path.Combine(folder, "MANUAL.html");
+        pandoc = Path.Combine(folder, "Pandoc User's Guide.html");
         if (!File.Exists(pandoc))
         {
             yield return new ValidationResult($"File {pandoc} does not exist", new[] { nameof(Folder) });
