@@ -403,3 +403,6 @@ src/structure/markdown/.output/*.epub
 src/structure/markdown/.output/*.pdf
 src/structure/markdown/.output/*.md
 src/**/.pandoc/pandoc.exe
+src/help/log.json
+src/help/.settings/pandocHTML.yaml
+src/help/.output/index.epub
