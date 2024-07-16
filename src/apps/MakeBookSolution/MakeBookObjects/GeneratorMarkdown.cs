@@ -43,10 +43,10 @@ public class GeneratorMarkdown : IGeneratorFiles
             {
                 FileName =  pandocExe,
                 WorkingDirectory = Folder,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = false,
+                RedirectStandardOutput = false,
+                RedirectStandardError = false,
+                UseShellExecute = true,
+                CreateNoWindow = true,
                 //Arguments = "-d .settings/pandocHTML.yaml -o .output/index.docx"
                 //Arguments = "-d .settings/pandocHTML.yaml -o .output/index.md -t gfm"
                 Arguments = cmd.Value

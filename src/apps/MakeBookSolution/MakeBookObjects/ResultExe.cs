@@ -19,7 +19,7 @@ public partial class ResultExe
     public string? Error { get; set; }
     public string? WorkingDirectory { get; set; }
     public DateTime StartDate { get; internal set; }
-
+    
     public static ResultExe Execute(ProcessStartInfo startInfo)
     {
         ResultExe resultExe = new (DateTime.UtcNow, startInfo);
@@ -30,8 +30,11 @@ public partial class ResultExe
         process.Start();
 
         // Read the output
-        resultExe.Output = process.StandardOutput.ReadToEnd();
-        resultExe.Error = process.StandardError.ReadToEnd();
+        if(startInfo.RedirectStandardOutput)
+            resultExe.Output = process.StandardOutput.ReadToEnd();
+
+        if(startInfo.RedirectStandardError)
+            resultExe.Error = process.StandardError.ReadToEnd();
 
         // Wait for the process to exit
         process.WaitForExit();

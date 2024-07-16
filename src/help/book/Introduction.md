@@ -22,6 +22,7 @@ Of course the help manual was created using this software. What is better than d
 If you want to edit, please go to https://github.com/ignatandrei/makeBook  and edit src/help files
 
 You can download this help file as  <a href="./index.html">HTML</a> , <a href="./index.docx">Word</a> , <a href="./index.pdf">PDF</a> or  <a href="./index.epub">EPUB</a>
+
  
  
 

@@ -405,4 +405,4 @@ src/structure/markdown/.output/*.md
 src/**/.pandoc/pandoc.exe
 src/help/log.json
 src/help/.settings/pandocHTML.yaml
-src/help/.output/index.epub
+src/help/.output/index.*

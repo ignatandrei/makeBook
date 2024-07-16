@@ -26,17 +26,18 @@
         "name":"make an epub",
         "value":"-d .settings/pandocHTML.yaml  --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" -o .output/index.epub",
         "enabled":true
-      },
-      {
-        "name":"make an pdf with miktext",
-        "value":"pandoc -d .settings/pandocHTML.yaml  --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" --pdf-engine xelatex -o .output/index.pdf",
-        "enabled":true
       },      
       {
         "name":"make markdown",
-        "value":"pandoc -d .settings/pandocHTML.yaml  --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" -o .output/index.md",
+        "value":"-d .settings/pandocHTML.yaml  --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" -o .output/index.md",
+        "enabled":true
+      },
+      {
+        "name":"make an pdf",
+        "value":"-d .settings/pandocHTML.yaml  --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" --pdf-engine xelatex -o .output/index.pdf",
         "enabled":true
       }
+      
 
     ]
 }
