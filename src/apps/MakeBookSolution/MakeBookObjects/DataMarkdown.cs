@@ -107,6 +107,12 @@ public class DataMarkdown(string Folder) : IValidatableObject
         var booksRelatives=files
             .Select(it=>it.Substring(Folder.Length))
             .Select(it=>it.Replace("\\","/"))
+            .Select(it =>
+            {
+                if(it.StartsWith("/")) return it.Substring(1);
+                if (it.StartsWith(@"\")) return it.Substring(1);
+                return it;
+            })
             .OrderBy(x=>x,comparer)            
             .ToArray();
 
@@ -236,8 +242,10 @@ public class DataMarkdown(string Folder) : IValidatableObject
             ArgumentNullException.ThrowIfNull(BookData);
             var loc = BookData.PandocLocation();
             ArgumentNullException.ThrowIfNull(loc, nameof(loc));
+            loc= Environment.ExpandEnvironmentVariables(loc);
             loc = loc.Replace('/', Path.DirectorySeparatorChar);
             loc = loc.Replace('\\', Path.DirectorySeparatorChar);
+            
             if (loc.StartsWith(".pandoc"))
                 return Path.Combine(Folder, loc);
             return loc;

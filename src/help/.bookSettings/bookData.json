@@ -1,32 +1,42 @@
 {
     "book":{
-        "title":"Please edit title in bookData.json from .bookSettings",
-        "author":"Please edit author in bookData.json from .bookSettings"
+        "title":"Make a Book  from markdown files",
+        "author":"Andrei Ignat"
     },
     "locations": [
     {
       "name": "pandoc",
-      "value": ".pandoc/pandoc.exe",
-      "valueInstall": "%LocalAppData%\\Pandoc\\pandoc.exe"
+      "valueNear": ".pandoc/pandoc.exe",
+      "value": "%LocalAppData%\\Pandoc\\pandoc.exe"
     }
 
   ],
     "commands": [
       {
         "name": "make a html",
-        "value": "-d .settings/pandocHTML.yaml --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" -o .output/index.html"
+        "value": "-d .settings/pandocHTML.yaml --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" -o .output/index.html",
+        "enabled":true
       },      
       {
         "name": "make a word",
-        "value": "-d .settings/pandocHTML.yaml  --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" -o .output/index.docx"
+        "value": "-d .settings/pandocHTML.yaml  --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" -o .output/index.docx",
+        "enabled":true
       },
       {
         "name":"make an epub",
-        "value":"-d .settings/pandocHTML.yaml  --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" -o .output/index.epub"
+        "value":"-d .settings/pandocHTML.yaml  --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" -o .output/index.epub",
+        "enabled":true
       },
       {
         "name":"make an pdf with miktext",
-        "value":"pandoc -d .settings/pandocHTML.yaml  --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" --pdf-engine xelatex -o .output/index1.pdf"
+        "value":"pandoc -d .settings/pandocHTML.yaml  --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" --pdf-engine xelatex -o .output/index.pdf",
+        "enabled":true
+      },      
+      {
+        "name":"make markdown",
+        "value":"pandoc -d .settings/pandocHTML.yaml  --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" -o .output/index.md",
+        "enabled":true
       }
+
     ]
 }

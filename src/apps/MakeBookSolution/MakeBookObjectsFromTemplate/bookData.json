@@ -14,7 +14,8 @@
   "commands": [
     {
       "name": "",
-      "value": ""
+      "value": "",
+      "enabled": true
     }
   ]
   

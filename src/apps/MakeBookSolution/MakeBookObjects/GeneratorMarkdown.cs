@@ -32,12 +32,16 @@ public class GeneratorMarkdown : IGeneratorFiles
 
         foreach (var cmd in commands)
         {
-
+            if(cmd.Enabled==false)
+            {
+                Console.WriteLine($"Skip: {cmd.Name}");
+                continue;
+            }
             Console.WriteLine($"Running: {cmd.Name}");
-            var pandocExe = data.PandocExe;
+            var pandocExe = data.PandocExe;            
             ProcessStartInfo startInfo = new()
             {
-                FileName = pandocExe,
+                FileName =  pandocExe,
                 WorkingDirectory = Folder,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,

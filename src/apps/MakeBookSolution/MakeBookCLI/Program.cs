@@ -9,7 +9,7 @@
         //args = new[] { "i", "--folder", @"D:\gth\test1\" };
         //args = new[] { "gmk", "--folder", @"D:\gth\test1\" };
 
-        args = new[] { "i", "--folder", @"D:\gth\makeBook\src\help" };
+        args = new[] { "gmk", "--folder", @"D:\gth\makeBook\src\help" };
     }
     RootCommand rootCommand = new();
     
