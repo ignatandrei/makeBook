@@ -3,6 +3,13 @@
         "title":"Please edit title in bookData.json from .bookSettings",
         "author":"Please edit author in bookData.json from .bookSettings"
     },
+    "locations": [
+    {
+      "name": "pandoc",
+      "value": ".pandoc/pandoc.exe"
+    }
+
+  ],
     "commands": [
       {
         "name": "make a html",

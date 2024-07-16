@@ -19,8 +19,7 @@ public class GeneratorMarkdown : IGeneratorFiles
     }
     public Results GenerateNow()
     {
-        Reset();        
-        data.TryToEnsureValid();
+        Reset();                
         var problems = data.Validate(new ValidationContext(this)).ToArray();
         if (problems.Any())
         {

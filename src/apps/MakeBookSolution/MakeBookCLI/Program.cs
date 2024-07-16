@@ -4,12 +4,13 @@
     if (args.Length == 0)
     {
         args = new[] { "-h" };
-        //args = new[] { "--version" };
+        args = new[] { "--version" };
 
-        //args = new[] { "gmk","--folder", @"D:\gth\test1\" };
         //args = new[] { "i", "--folder", @"D:\gth\test1\" };
+        args = new[] { "gmk", "--folder", @"D:\gth\test1\" };
     }
     RootCommand rootCommand = new();
+    
     rootCommand.Description = "Generate a book from a folder";
     Option<string> folder = new
             (name: "--folder",
@@ -33,7 +34,8 @@
         InitFolderStructure initFolder = new(folderWithFiles);
         initFolder.InitNow();
         WriteLine($"now execute gmk --folder "+folderWithFiles);
-
+        //await Task.Delay(5000);
+        //rootCommand.Invoke("gmk --folder " + folderWithFiles);
 
     }, folder);
     rootCommand.AddCommand(cmdInit);
@@ -41,6 +43,7 @@
     Command cmdGenerateMarkdown = new("generateFromMarkdown", "Generate from Markdown");
     cmdGenerateMarkdown.AddAlias("gmk");
     rootCommand.AddCommand(cmdGenerateMarkdown);
+    
     cmdGenerateMarkdown.SetHandler((folderWithFiles) =>
     {
         string folder = folderWithFiles;

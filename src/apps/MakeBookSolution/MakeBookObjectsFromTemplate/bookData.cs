@@ -31,6 +31,24 @@ public partial class bookData: IValidatableObject
                 }
             }
         }
+        if(this.Locations == null || this.Locations.Count() == 0)
+        {
+            yield return new ValidationResult("Locations is required", new[] { nameof(Commands) });
+        }
+        else
+        {
+            if (PandocLocation() == null)
+                yield return new ValidationResult("should have in locations pandoc ", new[] { nameof(Locations) });
+        }
+    }
+    public string? PandocLocation()
+    {
+        if (this.Locations == null) return null;
+        return this.Locations
+            .Where(it => it.Name == "pandoc")
+            .Select(it => it?.Value)
+            .FirstOrDefault()
+            ;
     }
     public static bookData? FromJson(string json)
     {

@@ -39,7 +39,7 @@ jobs:
     #  run: dotnet test --no-build --verbosity normal
 
 
-    - name: 'Upload nuget'
+    - name: 'Upload data'
       if: startsWith(github.ref, 'refs/tags/v') # This line ensures the step runs only if a tag version is present
       uses: actions/upload-artifact@v2
       with:
@@ -47,3 +47,8 @@ jobs:
         path: src/apps/MakeBookSolution/release
         retention-days: 1
 
+    - uses: ncipollo/release-action@v1
+      if: startsWith(github.ref, 'refs/tags/v') # This line ensures the step runs only if a tag version is present
+      with:
+        artifacts: "src/apps/MakeBookSolution/release/*.*"
+        bodyFile: "readme.md"

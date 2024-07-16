@@ -2,7 +2,7 @@
 
 public class DataMarkdown(string Folder) : IValidatableObject
 {
-    private bool ExtractPandoc()
+    public bool ExtractPandoc()
     {
         var fileExe = PandocExe;
         ArgumentNullException.ThrowIfNull(fileExe);
@@ -15,6 +15,8 @@ public class DataMarkdown(string Folder) : IValidatableObject
             return false;
         }
         ZipFile.ExtractToDirectory(zip,Path.GetDirectoryName(fileExe)!);
+        //allow time for zip file to finish
+        Thread.Sleep(5000);
         return true;
 
     }
@@ -23,13 +25,9 @@ public class DataMarkdown(string Folder) : IValidatableObject
         var folder = Path.Combine(Folder, "book");
         return Directory.GetFiles(folder, "*.md");
     }
-    public void TryToEnsureValid()
-    {
-        ExtractPandoc();
-    }
+    
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-    {
-        TryToEnsureValid();
+    {        
         var vc = ValidateBookSettings().ToArray();
         if (vc.Length > 0)
         {
@@ -171,8 +169,23 @@ public class DataMarkdown(string Folder) : IValidatableObject
         {
             foreach (var item in BookData.Validate(new ValidationContext(BookData)))
             {
+                item.ErrorMessage = $"file {bookDataPath}:{item.ErrorMessage}";
                 yield return item;
             }
+            //validate locations
+            var loc = this.BookData.PandocLocation();
+            if(loc == null)
+            {
+                yield return new ValidationResult("pandoc location must exists");
+                yield break;
+            }
+            ExtractPandoc();
+            if (!File.Exists(PandocExe))
+            {
+                
+                yield return new ValidationResult($"File {PandocExe} does not exist", new[] { nameof(Folder) });
+            }
+            
         }
         
     }
@@ -220,8 +233,14 @@ public class DataMarkdown(string Folder) : IValidatableObject
     {
         get
         {
-            var folder = Path.Combine(Folder, ".pandoc");
-            return Path.Combine(folder, "pandoc.exe");
+            ArgumentNullException.ThrowIfNull(BookData);
+            var loc = BookData.PandocLocation();
+            ArgumentNullException.ThrowIfNull(loc, nameof(loc));
+            loc = loc.Replace('/', Path.DirectorySeparatorChar);
+            loc = loc.Replace('\\', Path.DirectorySeparatorChar);
+            if (loc.StartsWith(".pandoc"))
+                return Path.Combine(Folder, loc);
+            return loc;
         }
     }
     
