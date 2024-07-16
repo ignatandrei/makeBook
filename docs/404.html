@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Andrei Ignat" />
+  <title>Make a Book  from markdown files – Make a Book  from markdown files</title>
+  <style>
+html {
+color: #1a1a1a;
+background-color: #fdfdfd;
+}
+body {
+margin: 0 auto;
+max-width: 36em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 12px;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+html {
+background-color: white;
+}
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+a {
+color: #1a1a1a;
+}
+a:visited {
+color: #1a1a1a;
+}
+img {
+max-width: 100%;
+}
+svg {
+height: auto;
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+font-size: 85%;
+margin: 0;
+hyphens: manual;
+}
+pre {
+margin: 1em 0;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+.sourceCode {
+background-color: transparent;
+overflow: visible;
+}
+hr {
+background-color: #1a1a1a;
+border: none;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid #1a1a1a;
+border-bottom: 1px solid #1a1a1a;
+}
+th {
+border-top: 1px solid #1a1a1a;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Make a Book from markdown files</h1>
+<p class="author">Andrei Ignat</p>
+</header>
+<nav id="fooTOC" role="doc-toc">
+<ul>
+<li><a href="#foointroduction-of-makebookcli" id="footoc-introduction-of-makebookcli">Introduction of MakeBookCli</a>
+<ul>
+<li><a href="#foowhy-" id="footoc-why-">Why ?</a></li>
+<li><a href="#fooabout" id="footoc-about">About</a></li>
+<li><a href="#foohow-the-help-manual-it-was-created" id="footoc-how-the-help-manual-it-was-created">How the help manual it
+was created</a></li>
+</ul></li>
+<li><a href="#foosteps-to-use" id="footoc-steps-to-use">Steps to use</a>
+<ul>
+<li><a href="#fooinstallation" id="footoc-installation">Installation</a></li>
+<li><a href="#foousage" id="footoc-usage">Usage</a></li>
+<li><a href="#foopdf" id="footoc-pdf">PDF</a></li>
+</ul></li>
+<li><a href="#fooadvanced---organization" id="footoc-advanced---organization">Advanced - Organization</a>
+<ul>
+<li><a href="#foofolders" id="footoc-folders">Folders</a></li>
+</ul></li>
+</ul>
+</nav>
+<section id="foointroduction-of-makebookcli" class="level2">
+<h2>Introduction of MakeBookCli</h2>
+<section id="foowhy-" class="level3">
+<h3>Why ?</h3>
+<p>Every now and then I have wanted to transform my investigations ,
+written as blog posts, into books</p>
+<p>Also occured to me that I want to write a book. But each chapter was
+self sufficient. And transforming different chapters into a book
+required manual labor . That for this software application, that has as
+purpose to transform a chapter collection into a book ( i.e. a HTML
+document or a Word document or a )</p>
+</section>
+<section id="fooabout" class="level3">
+<h3>About</h3>
+<p>My name is Andrei Ignat .</p>
+<p><img role="img" aria-label="Author" src="data:image/jpeg;base64,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" title="Author" alt="Author" /></p>
+<p>This software is open source and you can download from <a href="https://github.com/ignatandrei/makeBook">https://github.com/ignatandrei/makeBook</a></p>
+</section>
+<section id="foohow-the-help-manual-it-was-created" class="level3">
+<h3>How the help manual it was created</h3>
+<p>Of course the help manual was created using this software. What is
+better than dogfooding ?</p>
+<p>If you want to edit, please go to <a href="https://github.com/ignatandrei/makeBook">https://github.com/ignatandrei/makeBook</a>
+and edit src/help files</p>
+<p>You can download this help file as <a href="./index.html">HTML</a> ,
+<a href="./index.docx">Word</a> , <a href="./index.pdf">PDF</a> or
+<a href="./index.epub">EPUB</a></p>
+</section>
+</section>
+<section id="foosteps-to-use" class="level2">
+<h2>Steps to use</h2>
+<section id="fooinstallation" class="level3">
+<h3>Installation</h3>
+<p>Download latest version of the software from github</p>
+<p><a href="https://github.com/ignatandrei/makeBook/releases">https://github.com/ignatandrei/makeBook/releases</a></p>
+<p>Note for Windows Users : Unblock the software prior to execute
+it.</p>
+<p>Now run</p>
+<pre><code>MakeBookCLI i --folder 
+MakeBookCLI gmk --folder</code></pre>
+<p>The first command will init the structure.</p>
+<p>The second one will start to generate output ( html, doc,epub) from
+the markdown files.</p>
+</section>
+<section id="foousage" class="level3">
+<h3>Usage</h3>
+<section id="fooput-title-and-author" class="level4">
+<h4>Put title and author</h4>
+<p>Modify bookData.json file in the .bookSettings folder and change the
+author ( obviously , your name ) and title ( obviously , the title of
+the book )</p>
+</section>
+<section id="fooput-the-chapters-in-the-book-folder" class="level4">
+<h4>Put the chapters in the book folder</h4>
+<p>Modify the documents on the book folder. The program will execute
+continuously and generate the html and doc documents . Those can be seen
+at the .output folder</p>
+</section>
+</section>
+<section id="foopdf" class="level3">
+<h3>PDF</h3>
+<p>If you want the pdf , then you should install a PDF Engine . You
+could install miktext with</p>
+<div class="sourceCode" id="foocb2"><pre class="sourceCode json"><code class="sourceCode json"><span id="foocb2-1"><a href="#foocb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="foocb2-2"><a href="#foocb2-2" aria-hidden="true" tabindex="-1"></a><span class="er">choco</span> <span class="er">install</span> <span class="er">pandoc</span></span>
+<span id="foocb2-3"><a href="#foocb2-3" aria-hidden="true" tabindex="-1"></a><span class="er">choco</span> <span class="er">install</span> <span class="er">rsvg-convert</span> <span class="er">python</span> <span class="er">miktex</span></span></code></pre></div>
+<p>Modify in the .bookSettings/bookData.json</p>
+<div class="sourceCode" id="foocb3"><pre class="sourceCode json"><code class="sourceCode json"><span id="foocb3-1"><a href="#foocb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="foocb3-2"><a href="#foocb3-2" aria-hidden="true" tabindex="-1"></a><span class="er">&quot;valueNear&quot;:</span> <span class="er">&quot;.pandoc/pandoc.exe&quot;,</span></span>
+<span id="foocb3-3"><a href="#foocb3-3" aria-hidden="true" tabindex="-1"></a><span class="er">&quot;value&quot;:</span> <span class="er">&quot;%LocalAppData%\\Pandoc\\pandoc.exe&quot;</span></span></code></pre></div>
+<p>Also modify in .bookSettings/bookData.json the &quot;make an pdf with
+miktext&quot; value</p>
+<div class="sourceCode" id="foocb4"><pre class="sourceCode json"><code class="sourceCode json"><span id="foocb4-1"><a href="#foocb4-1" aria-hidden="true" tabindex="-1"></a><span class="er">&quot;enabled&quot;:true,</span></span>
+<span id="foocb4-2"><a href="#foocb4-2" aria-hidden="true" tabindex="-1"></a><span class="er">&quot;redirectOutput&quot;:false</span></span></code></pre></div>
+<p>Close the app ( and the console that you are using )and restart the
+application .</p>
+</section>
+</section>
+<section id="fooadvanced---organization" class="level2">
+<h2>Advanced - Organization</h2>
+<section id="foofolders" class="level3">
+<h3>Folders</h3>
+<p>There are 4 folders into the project: .output , .bookSettings,
+.pandoc , book</p>
+<section id="foooutput" class="level4">
+<h4>.output</h4>
+<p>This folder will contain the output of the application. The output
+can be HTML, DOCX, EPUB, PDF or any other kind pandoc will generate</p>
+</section>
+<section id="foopandoc" class="level4">
+<h4>.pandoc</h4>
+<p>Here will be the pandoc executable with all files needed to generate
+documents.</p>
+</section>
+<section id="foobooksettings" class="level4">
+<h4>.bookSettings</h4>
+<p>Here will be the settings of the book. The most important file is
+bookData.json . This is a sample:</p>
+<div class="sourceCode" id="foocb5"><pre class="sourceCode json"><code class="sourceCode json"><span id="foocb5-1"><a href="#foocb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="foocb5-2"><a href="#foocb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;book&quot;</span><span class="fu">:{</span></span>
+<span id="foocb5-3"><a href="#foocb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;title&quot;</span><span class="fu">:</span><span class="st">&quot;The book title&quot;</span><span class="fu">,</span></span>
+<span id="foocb5-4"><a href="#foocb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;author&quot;</span><span class="fu">:</span><span class="st">&quot;Your name&quot;</span></span>
+<span id="foocb5-5"><a href="#foocb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="foocb5-6"><a href="#foocb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;locations&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="foocb5-7"><a href="#foocb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="foocb5-8"><a href="#foocb5-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;pandoc&quot;</span><span class="fu">,</span></span>
+<span id="foocb5-9"><a href="#foocb5-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;.pandoc/pandoc.exe&quot;</span><span class="fu">,</span></span>
+<span id="foocb5-10"><a href="#foocb5-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;valueIfChocoInstalled&quot;</span><span class="fu">:</span> <span class="st">&quot;%LocalAppData%</span><span class="ch">\\</span><span class="st">Pandoc</span><span class="ch">\\</span><span class="st">pandoc.exe&quot;</span></span>
+<span id="foocb5-11"><a href="#foocb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="foocb5-12"><a href="#foocb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="foocb5-13"><a href="#foocb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="foocb5-14"><a href="#foocb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;commands&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="foocb5-15"><a href="#foocb5-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">{</span></span>
+<span id="foocb5-16"><a href="#foocb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;make a html&quot;</span><span class="fu">,</span></span>
+<span id="foocb5-17"><a href="#foocb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;-d .settings/pandocHTML.yaml --resource-path book --metadata=title:</span><span class="ch">\&quot;</span><span class="st">{title}</span><span class="ch">\&quot;</span><span class="st"> --metadata=author:</span><span class="ch">\&quot;</span><span class="st">{author}</span><span class="ch">\&quot;</span><span class="st"> --title </span><span class="ch">\&quot;</span><span class="st">{title}</span><span class="ch">\&quot;</span><span class="st"> -o .output/index.html&quot;</span><span class="fu">,</span></span>
+<span id="foocb5-18"><a href="#foocb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;enabled&quot;</span><span class="fu">:</span><span class="kw">true</span></span>
+<span id="foocb5-19"><a href="#foocb5-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span><span class="ot">,</span>      </span>
+<span id="foocb5-20"><a href="#foocb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span></span>
+<span id="foocb5-21"><a href="#foocb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+</section>
+<section id="foobook" class="level4">
+<h4>book</h4>
+<p>Here you will put the chapters of the book. Each chapter will be a
+markdown file. The order of the chapters will be the order of the files.
+However, introduction.md will be the first ( if exists )</p>
+<p>I suggest to put each image for a chapter in a separate folder with
+the name of the chapter. This will help you to organize the images. ( It
+is not necesssary, but it is a good practice )</p>
+</section>
+</section>
+</section>
+</body>
+</html>

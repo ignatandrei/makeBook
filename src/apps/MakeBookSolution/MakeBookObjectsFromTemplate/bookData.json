@@ -15,7 +15,8 @@
     {
       "name": "",
       "value": "",
-      "enabled": true
+      "enabled": true,
+      "redirectOutput": true
     }
   ]
   

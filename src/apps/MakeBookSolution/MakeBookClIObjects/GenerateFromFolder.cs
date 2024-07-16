@@ -84,7 +84,7 @@ public class GenerateFromFolder
                 foreach (var item in problems.resultExesErrors)
                 {
                     WriteLine(item.Name);
-                    WriteLine(item.ToString(""));
+                    WriteLine(item.ToString(""));                    
                     WriteLine("--");
                 }
                 
