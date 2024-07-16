@@ -4,10 +4,12 @@
     if (args.Length == 0)
     {
         args = new[] { "-h" };
-        args = new[] { "--version" };
+        //args = new[] { "--version" };
 
         //args = new[] { "i", "--folder", @"D:\gth\test1\" };
-        args = new[] { "gmk", "--folder", @"D:\gth\test1\" };
+        //args = new[] { "gmk", "--folder", @"D:\gth\test1\" };
+
+        args = new[] { "i", "--folder", @"D:\gth\makeBook\src\help" };
     }
     RootCommand rootCommand = new();
     

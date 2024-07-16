@@ -1,0 +1,32 @@
+{
+    "book":{
+        "title":"Please edit title in bookData.json from .bookSettings",
+        "author":"Please edit author in bookData.json from .bookSettings"
+    },
+    "locations": [
+    {
+      "name": "pandoc",
+      "value": ".pandoc/pandoc.exe",
+      "valueInstall": "%LocalAppData%\\Pandoc\\pandoc.exe"
+    }
+
+  ],
+    "commands": [
+      {
+        "name": "make a html",
+        "value": "-d .settings/pandocHTML.yaml --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" -o .output/index.html"
+      },      
+      {
+        "name": "make a word",
+        "value": "-d .settings/pandocHTML.yaml  --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" -o .output/index.docx"
+      },
+      {
+        "name":"make an epub",
+        "value":"-d .settings/pandocHTML.yaml  --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" -o .output/index.epub"
+      },
+      {
+        "name":"make an pdf with miktext",
+        "value":"pandoc -d .settings/pandocHTML.yaml  --resource-path book --metadata=title:\"{title}\" --metadata=author:\"{author}\" --title \"{title}\" --pdf-engine xelatex -o .output/index1.pdf"
+      }
+    ]
+}
