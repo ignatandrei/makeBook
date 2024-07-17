@@ -1,6 +1,27 @@
 ﻿//using System.Drawing.Printing;
-    try
+
+try
 {
+    var data = await new LatestVersion().LatestVersionNumber("ignatandrei", "MakeBook");
+    
+    data.Switch(
+        (s) => {
+            if (ThisAssembly.Info.Version.Contains(s))
+            {
+                WriteLine($"You are at latest version {s}");
+            }
+            else
+            {
+                WriteLine($"You are at version {ThisAssembly.Info.Version}");
+                WriteLine($"Please download latest version {s}");
+
+            }
+        },
+        (e) => {
+            //do nothing
+        }
+    );
+    
     if (args.Length == 0)
     {
         args = new[] { "-h" };

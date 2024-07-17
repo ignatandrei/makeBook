@@ -1,13 +1,6 @@
 ﻿
 namespace MakeBookLatestVersion;
 
-
-[OneOf.GenerateOneOf]
-public partial class ResultsHttp<T> : OneOf.OneOfBase<T,Exception >
-{
-
-}
-
 public class LatestVersion
 {
 
@@ -26,6 +19,7 @@ public class LatestVersion
                 {
                     var root = doc.RootElement;
                     var tagName = root.GetProperty("tag_name").GetString();
+                    ArgumentNullException.ThrowIfNullOrWhiteSpace(tagName);
                     return tagName;
                 }
             }
