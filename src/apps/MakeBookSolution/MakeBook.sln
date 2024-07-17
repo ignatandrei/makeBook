@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakeBookClIObjects", "MakeB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakeBookInit", "MakeBookInit\MakeBookInit.csproj", "{FB134866-BE61-48F3-8584-053B4780FFD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakeBookObjectsTemplating", "MakeBookObjectsTemplating\MakeBookObjectsTemplating.csproj", "{977922EB-C626-4ACA-B82D-8AD160E252FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakeBookObjectsTemplating", "MakeBookObjectsTemplating\MakeBookObjectsTemplating.csproj", "{977922EB-C626-4ACA-B82D-8AD160E252FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakeBookLatestVersion", "MakeBookLatestVersion\MakeBookLatestVersion.csproj", "{16798D94-2686-48F4-AEA8-8E3634A4D8B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{977922EB-C626-4ACA-B82D-8AD160E252FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{977922EB-C626-4ACA-B82D-8AD160E252FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{977922EB-C626-4ACA-B82D-8AD160E252FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16798D94-2686-48F4-AEA8-8E3634A4D8B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16798D94-2686-48F4-AEA8-8E3634A4D8B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16798D94-2686-48F4-AEA8-8E3634A4D8B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16798D94-2686-48F4-AEA8-8E3634A4D8B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
