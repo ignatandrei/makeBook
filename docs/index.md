@@ -62,7 +62,7 @@ Download latest version of the software from github
 <https://github.com/ignatandrei/makeBook/releases>
 
 You will download an executable file - latest is
-<https://github.com/ignatandrei/makeBook/releases/download/v8.2024.717.2216/MakeBookCLI.exe>
+<https://github.com/ignatandrei/makeBook/releases/download/v8.2024.717.2249/MakeBookCLI.exe>
 
 Note for Windows Users : Unblock the software prior to execute it.
 
