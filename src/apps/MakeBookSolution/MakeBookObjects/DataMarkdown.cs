@@ -101,6 +101,14 @@ public class DataMarkdown(string Folder) : IValidatableObject
             {
                 return  1;
             }
+            if(a.Contains("Conclusion"))
+            {
+                return 1;
+            }
+            if (b.Contains("Conclusion"))
+            {
+                return -1;
+            }
             return a.CompareTo(b);
         });
         //Console.WriteLine("files: " + files.Length);
