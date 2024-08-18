@@ -3,10 +3,10 @@ namespace MakeBookLatestVersion;
 
 public class LatestVersion
 {
-
+    public string LatestVersionURL = string.Empty;
     public async Task<ResultsHttp<string>> LatestVersionNumber(string owner, string repo)
     {
-        string url = $"https://api.github.com/repos/{owner}/{repo}/releases/latest";
+        LatestVersionURL = $"https://api.github.com/repos/{owner}/{repo}/releases/latest";
 
         using (var client = new HttpClient())
         {
@@ -14,7 +14,7 @@ public class LatestVersion
             client.DefaultRequestHeaders.Add("User-Agent", "request");
             try
             {
-                var response = await client.GetStringAsync(url);
+                var response = await client.GetStringAsync(LatestVersionURL);
                 using (JsonDocument doc = JsonDocument.Parse(response))
                 {
                     var root = doc.RootElement;

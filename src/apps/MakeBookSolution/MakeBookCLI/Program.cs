@@ -2,18 +2,19 @@
 
 try
 {
-    var data = await new LatestVersion().LatestVersionNumber("ignatandrei", "MakeBook");
+    var latestVersion = new LatestVersion();
+    var data = await latestVersion.LatestVersionNumber("ignatandrei", "MakeBook");
     
     data.Switch(
         (s) => {
-            if (ThisAssembly.Info.Version.Contains(s))
+            if (ThisAssembly.Info.Version.Contains(s) || s.Contains(ThisAssembly.Info.Version))
             {
                 WriteLine($"You are at latest version {s}");
             }
             else
             {
-                WriteLine($"You are at version {ThisAssembly.Info.Version}");
-                WriteLine($"Please download latest version {s}");
+                WriteLine($"You are at version !{ThisAssembly.Info.Version}! instead of !{s}!");
+                WriteLine($"Please download latest version {s} from {latestVersion.LatestVersionURL}");
 
             }
         },
@@ -31,6 +32,7 @@ try
         //args = new[] { "gmk", "--folder", @"D:\gth\test1\" };
 
         //args = new[] { "gmk", "--folder", @"D:\gth\makeBook\src\help" };
+        args = new[] { "t" };
     }
     RootCommand rootCommand = new();
     
@@ -43,6 +45,14 @@ try
     folder.AddAlias("-f");
     folder.AddAlias("-d");
     rootCommand.AddGlobalOption(folder);
+
+    Command cmdTutorial = new("tutorial", "Tutorial about the program");
+    cmdTutorial.AddAlias("t");
+    cmdTutorial.SetHandler((Action)(() =>
+    {
+        WriteTutorial();
+    }));
+    rootCommand.AddCommand(cmdTutorial);
 
     Command cmdInit = new("init", "Initialize a folder with the book data");
     cmdInit.AddAlias("i");
@@ -89,6 +99,17 @@ catch (Exception ex)
 {
     WriteLine("Exception " + ex.Message);
     return -1;
+}
+
+static void WriteTutorial()
+{
+    var data = MyAdditionalFiles.tutorial_gen_txt;
+    var tempFile = Path.GetTempFileName();
+    tempFile = Path.ChangeExtension(tempFile, ".md");
+    File.WriteAllText(tempFile, data);
+    Console.WriteLine($"Tutorial written to {tempFile}");
+    Process.Start(new ProcessStartInfo(tempFile) { UseShellExecute = true });
+
 }
 //string folder = @"D:\gth\makeBook\src\structure\markdown";
 
