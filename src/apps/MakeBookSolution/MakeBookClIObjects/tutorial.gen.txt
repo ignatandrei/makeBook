@@ -1,19 +1,30 @@
-﻿# Steps to use
+﻿# Steps to use 
 
 ## Installation
 
-Download latest version of the software from github
+### (Recommended) Winget
 
+```powershell
+winget install ignatandrei.MakeBookCLI
+```
+
+### Github
+
+Download latest version of the software from github
+ 
 https://github.com/ignatandrei/makeBook/releases
 
 You will download an executable file - latest is https://github.com/ignatandrei/makeBook/releases/download/v8.2024.717.2249/MakeBookCLI.exe
 
 Note for Windows Users :  Unblock the software prior to execute it.
 
+
+## Run MakeBookCLI
+
 Now run
 
 ```
-MakeBookCLI i --folder
+MakeBookCLI i --folder 
 MakeBookCLI gmk --folder
 ```
 
@@ -44,7 +55,7 @@ choco install rsvg-convert python miktex
 
 ```
 
-Modify in the .bookSettings/bookData.json
+Modify in the .bookSettings/bookData.json 
 
 ```json
 
@@ -52,12 +63,12 @@ Modify in the .bookSettings/bookData.json
 "value": "%LocalAppData%\\Pandoc\\pandoc.exe"
 
 ```
-Also modify in .bookSettings/bookData.json the "make an pdf with miktext" value
+Also modify in .bookSettings/bookData.json the "make an pdf with miktext" value 
 ```json
 "enabled":true,
 "redirectOutput":false
 ```
 
-Close the app ( and the console that you are using )and restart the application .
+Close the app ( and the console that you are using )and restart the application . 
 
 For more details,please read documentation at https://ignatandrei.github.io/makeBook/

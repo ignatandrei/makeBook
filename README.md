@@ -2,6 +2,14 @@
 
 ## Installation
 
+### (Recommended) Winget
+
+```powershell
+winget install ignatandrei.MakeBookCLI
+```
+
+### Github
+
 Download latest version of the software from github
  
 https://github.com/ignatandrei/makeBook/releases
@@ -9,6 +17,9 @@ https://github.com/ignatandrei/makeBook/releases
 You will download an executable file - latest is https://github.com/ignatandrei/makeBook/releases/download/v8.2024.717.2249/MakeBookCLI.exe
 
 Note for Windows Users :  Unblock the software prior to execute it.
+
+
+## Run MakeBookCLI
 
 Now run
 

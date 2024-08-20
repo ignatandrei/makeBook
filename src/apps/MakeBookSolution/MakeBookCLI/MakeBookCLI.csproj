@@ -31,13 +31,6 @@
 	</PropertyGroup>
 
 
-	<ItemGroup>
-		<PackageReference Include="rscgutils" Version="2023.514.835" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-
-	</ItemGroup>
-	<ItemGroup>
-		<AdditionalFiles Include="tutorial.gen.txt" />
-	</ItemGroup>
 
 
 </Project>

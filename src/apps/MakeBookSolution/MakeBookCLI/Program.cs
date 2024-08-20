@@ -50,7 +50,7 @@ try
     cmdTutorial.AddAlias("t");
     cmdTutorial.SetHandler((Action)(() =>
     {
-        WriteTutorial();
+        HelpData.WriteTutorial();
     }));
     rootCommand.AddCommand(cmdTutorial);
 
@@ -101,16 +101,7 @@ catch (Exception ex)
     return -1;
 }
 
-static void WriteTutorial()
-{
-    var data = MyAdditionalFiles.tutorial_gen_txt;
-    var tempFile = Path.GetTempFileName();
-    tempFile = Path.ChangeExtension(tempFile, ".md");
-    File.WriteAllText(tempFile, data);
-    Console.WriteLine($"Tutorial written to {tempFile}");
-    Process.Start(new ProcessStartInfo(tempFile) { UseShellExecute = true });
 
-}
 //string folder = @"D:\gth\makeBook\src\structure\markdown";
 
 
