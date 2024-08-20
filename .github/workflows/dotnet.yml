@@ -39,18 +39,26 @@ jobs:
     #  run: dotnet test --no-build --verbosity normal
 
 
-    - name: 'Upload data'
+    - name: 'Upload data CLI Win'
       if: startsWith(github.ref, 'refs/tags/v') # This line ensures the step runs only if a tag version is present
       uses: actions/upload-artifact@v2
       with:
         name: data_${{github.run_number}}
-        path: src/apps/MakeBookSolution/release
+        path: src/apps/MakeBookSolution/releaseWinCLI
         retention-days: 1
 
+    - name: 'Upload data Win'
+        if: startsWith(github.ref, 'refs/tags/v') # This line ensures the step runs only if a tag version is present
+        uses: actions/upload-artifact@v2
+        with:
+          name: data_${{github.run_number}}
+          path: src/apps/MakeBookSolution/releaseWin
+          retention-days: 1
+  
     - uses: ncipollo/release-action@v1
       if: startsWith(github.ref, 'refs/tags/v') # This line ensures the step runs only if a tag version is present
       with:
-        artifacts: "src/apps/MakeBookSolution/release/*.*"
+        artifacts: "src/apps/MakeBookSolution/releaseWin/*.*,src/apps/MakeBookSolution/releaseWinCLI/*.*"
         bodyFile: "README.md"
       
     # - uses: actions/github-script@v4
