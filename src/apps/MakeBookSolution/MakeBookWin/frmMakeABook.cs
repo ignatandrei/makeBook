@@ -1,10 +1,25 @@
+using ClickOnceHelper;
+using System.Collections.Specialized;
+using System.Web;
+
 namespace MakeBookWin;
 
 public partial class frmMakeBook : Form
 {
-    public frmMakeBook()
+    public frmMakeBook() 
     {
         InitializeComponent();
+        if (ApplicationDeployment.IsNetworkDeployed)
+        {
+            ApplicationDeployment ad = ApplicationDeployment.CurrentDeployment;
+            if(ad.ActivationUri != null)
+            {
+                MessageBox.Show($"ActivationUri: {ad.ActivationUri}");
+                //NameValueCollection nameValueTable = new NameValueCollection();
+                //string query = ad.ActivationUri.Query;
+                //nameValueTable = HttpUtility.ParseQueryString(query);
+            }
+        }
     }
     private void btnHelp_Click(object sender, EventArgs e)
     {
