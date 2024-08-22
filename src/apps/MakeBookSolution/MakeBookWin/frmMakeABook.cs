@@ -42,13 +42,17 @@ public partial class frmMakeBook : Form
         try
         {
             IGeneratorFiles generatorFiles = new GeneratorMarkdown(folderWithFiles);
-            GenerateFromFolder generateFromFolder = new(folderWithFiles, generatorFiles);
+            using GenerateFromFolder generateFromFolder = new(folderWithFiles, generatorFiles);
             var result = generateFromFolder.GenerateNow();
             if(result)
             {
                 string folder =Path.Combine( folderWithFiles,".output");
                 MessageBox.Show($"Please see files in {folder}", "Generating", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Process.Start("explorer.exe", folder);
+            }
+            else
+            {
+                MessageBox.Show("Problem with generating", "No Files", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         catch (Exception ex)

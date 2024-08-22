@@ -1,6 +1,6 @@
 ﻿namespace MakeBookClIObjects;
 
-public class GenerateFromFolder
+public class GenerateFromFolder: IDisposable
 {
     private readonly IGeneratorFiles generatorFiles;
     FileSystemWatcher fileSystemWatcher;
@@ -23,24 +23,26 @@ public class GenerateFromFolder
     {
         return fileSystemWatcher.WaitForChanged(WatcherChangeTypes.All);
     }
-    private void ReGenerate(FileSystemEventArgs e)
+    private bool? ReGenerate(FileSystemEventArgs e)
     {
         var whatChanged = e.FullPath;
         if (whatChanged.Contains(".output"))
         {
-            return;
+            return null;
         }
         if (whatChanged.Contains("log.json"))
         {
-            return;
+            return null;
         }
         if(whatChanged.EndsWith("pandocHTML.yaml"))
         {
-            return;
+            return null;
         }
 
         WriteLine($"Regenerating for {whatChanged} at {DateTime.Now.ToString("HHmmss")}");
-        GenerateNow();
+        var res = GenerateNow();
+        WriteLine($"Regenerated for {whatChanged} at {DateTime.Now.ToString("HHmmss")} with result {res}");
+        return res;
     }
 
     public string Folder { get; }
@@ -91,5 +93,10 @@ public class GenerateFromFolder
             }
         );
         return true;
+    }
+
+    public void Dispose()
+    {
+        this.fileSystemWatcher.Dispose();
     }
 }
