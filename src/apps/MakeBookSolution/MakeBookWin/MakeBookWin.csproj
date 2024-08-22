@@ -7,7 +7,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
 	  <EnableWindowsTargeting>true</EnableWindowsTargeting>
-	  <Version>8.2024.821.1900</Version>
+	  <Version>8.2024.822.523</Version>
   </PropertyGroup>
 
   <ItemGroup>
